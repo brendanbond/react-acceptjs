@@ -180,7 +180,7 @@ type DispatchDataResponse = {
 
 - <code><b>authData</b> : <em>{ clientKey: string; apiLoginId: string; }</em></code> - Required. Your Authorize.net client key and API login ID.
 - <code><b>onSubmit</b> : <em>(response: HostedFormDispatchDataFnResponse) => void</em></code> - Required. The function that will receive and handle the response from Authorize.net (which, if successful, will include the payment nonce as well as certain encrypted CC information).
-- <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')</em></code> - Optional, defaults to `'SANDBOX'`. Indicates whether you're running a sandbox or production Authorize.net account.
+- <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION'</em></code> - Optional, defaults to `'SANDBOX'`. Indicates whether you're running a sandbox or production Authorize.net account.
 - <code><b>billingAddressOptions</b> : <em>{ show: boolean; required: boolean }</em></code> - Optional, defaults to `{show: true, required: true}`. Indicates whether the hosted form will display and/or require billing information.
 - <code><b>formButtonText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that the payment button will display.
 - <code><b>formHeaderText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that the hosted form will display as a header.
