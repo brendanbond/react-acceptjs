@@ -117,6 +117,8 @@ const App = () => {
 
 ## API Reference
 
+### Hook
+
 ```ts
 const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
 ```
@@ -171,6 +173,8 @@ type DispatchDataResponse = {
 
 - <code><b>loading</b> : <em>boolean</em></code> - Indicates whether the Accept.js library is currently loading.
 - <code><b>error</b> : <em>boolean</em></code> - Indicates whether an error has occured while loading the Accept.js library.
+
+### Component
 
 ```tsx
 <HostedForm authData={authData} onSubmit={handleSubmit} />
