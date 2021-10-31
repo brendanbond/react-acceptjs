@@ -121,13 +121,12 @@ const App = () => {
 
 **Arguments:**
 
-- authData : _{ clientKey: string; apiLoginId: string; } (required)_ - your Authorize.net client key and API login ID
-- environment : _'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')_ - whether you're running a sandbox or production Authorize.net account
+- **`authData`**` : _{ clientKey: string; apiLoginId: string; } (required)_` - your Authorize.net client key and API login ID
+- **`environment`**` : _'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')_` - whether you're running a sandbox or production Authorize.net account
 
 **Return Value:**
 
-- dispatchData : _(paymentData: { PaymentData }) => Promise<DispatchDataResponse>_ - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
-
+- **`dispatchData`**` : _(paymentData: { PaymentData }) => Promise<DispatchDataResponse>_` - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
 ```ts
 type PaymentData = {
   cardData: {
@@ -140,7 +139,6 @@ type PaymentData = {
 ```
 
 If you're transmitting bank account data, the `PaymentData` type will instead consist of:
-
 ```ts
 type PaymentData = {
   bankData: {
@@ -153,7 +151,6 @@ type PaymentData = {
 ```
 
 The `dispatchData()` function will return a value of type `DispatchDataResponse,` which will consist of either your payment nonce (referred to as `opaqueData`) for use in processing the transaction or an error message:
-
 ```ts
 type DispatchDataResponse = {
   opaqueData: {
@@ -167,22 +164,22 @@ type DispatchDataResponse = {
 };
 ```
 
-- **`loading`** :` _boolean_` - a boolean value that indicates whether the Accept.js library is currently loading
-- **`error`**: `_boolean_` - a boolean value that indicates whether an error has occured while loading the Accept.js library
+- **`loading`**` : _boolean_` - a boolean value that indicates whether the Accept.js library is currently loading
+- **`error`**` : _boolean_` - a boolean value that indicates whether an error has occured while loading the Accept.js library
 
 `<HostedForm authData={authData} onSubmit={handleSubmit} />;`
 
 **Props**
 
-- authData : _{ clientKey: string; apiLoginId: string; } (required)_ - your Authorize.net client key and API login ID
-- onSubmit: _(response: HostedFormDispatchDataFnResponse) => void (required)_ - the function that will receive and handle the response from Authorize.net (which, if successful, will include the payment nonce as well as certain encrypted CC information)
-- environment : _'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')_ - whether you're running a sandbox or production Authorize.net account
-- billingAddressOptions : _{ show: boolean; required: boolean } (optional, defaults to {show: true, required: true})_ - what billing information the hosted form will display and require
-- formButtonText : _string (optional, defaults to "Pay")_ - the text that the payment button will display
-- formHeaderText : _string (optional, defaults to "Pay")_ - the text that the hosted form will display as a header
-- paymentOptions : _{ showCreditCard: boolean, showBankAccount: boolean } (optional, defaults to { showCreditCard: true, showBankAccount: false })_ - what payment options the hosted form will provide
-- buttonStyle : _React.CSSProperties (optional, defaults to null)_ - a style object for the payment button
-- errorTextStyle : _React.CSSProperties (optional, defaults to null)_ - a style object for the error text that displays under the payment button on error
+- **`authData`**` : _{ clientKey: string; apiLoginId: string; } (required)_` - your Authorize.net client key and API login ID
+- **`onSubmit`**` : _(response: HostedFormDispatchDataFnResponse) => void (required)_` - the function that will receive and handle the response from Authorize.net (which, if successful, will include the payment nonce as well as certain encrypted CC information)
+- **`environment`**` : _'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')_` - whether you're running a sandbox or production Authorize.net account
+- **`billingAddressOptions`**` : _{ show: boolean; required: boolean } (optional, defaults to {show: true, required: true})_` - what billing information the hosted form will display and require
+- **`formButtonText`**` : _string (optional, defaults to "Pay")_` - the text that the payment button will display
+- **`formHeaderText`**` : _string (optional, defaults to "Pay")_` - the text that the hosted form will display as a header
+- **`paymentOptions`**` : _{ showCreditCard: boolean, showBankAccount: boolean } (optional, defaults to { showCreditCard: true, showBankAccount: false })_` - what payment options the hosted form will provide`
+- **`buttonStyle`**` : _React.CSSProperties (optional, defaults to null)_` - a style object for the payment button
+- **`errorTextStyle`**` : _React.CSSProperties (optional, defaults to null)_` - a style object for the error text that displays under the payment button on error
 
 ## License
 
