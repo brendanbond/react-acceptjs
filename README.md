@@ -123,12 +123,12 @@ const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
 
 **Arguments:**
 
-- **`authData`**_`: { clientKey: string; apiLoginId: string; } (required)`_ - your Authorize.net client key and API login ID
-- **`environment`**_`: 'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')`_ - whether you're running a sandbox or production Authorize.net account
+- <code><b>authData</b> : <em>{ clientKey: string; apiLoginId: string; } (required)</em></code> - your Authorize.net client key and API login ID
+- <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')</em></code> - indicates whether you are running a sandbox or a production Authorize.net account
 
 **Return Value:**
 
-- **`dispatchData`**_`: (paymentData: { PaymentData }) => Promise<DispatchDataResponse>`_ - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
+- <code><b>dispatchData</b> : <em>(paymentData: { PaymentData }) => Promise<DispatchDataResponse></em></code>`_ - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
 
 ```ts
 type PaymentData = {
