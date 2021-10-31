@@ -128,7 +128,7 @@ const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
 
 **Return Value:**
 
-- <code><b>dispatchData</b> : <em>(paymentData: { PaymentData }) => Promise<DispatchDataResponse></em></code>`_ - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
+- <code><b>dispatchData</b> : <em>(paymentData: { PaymentData }) => Promise\<DispatchDataResponse\></em></code>`_ - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
 
 ```ts
 type PaymentData = {
