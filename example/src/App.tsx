@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { HostedForm } from 'react-acceptjs';
-import { HostedFormResponseHandlerFn } from '../../dist/types';
 
 const authData = {
   apiLoginID: process.env.REACT_APP_API_LOGIN_ID as string,
@@ -73,10 +72,12 @@ const authData = {
 // };
 
 const App = () => {
-  const handleSubmit: HostedFormResponseHandlerFn = (opaqueData) => {
-    console.log('Received response:', opaqueData);
-  };
-  return <HostedForm authData={authData} onSubmit={handleSubmit} />;
+  return (
+    <HostedForm
+      authData={authData}
+      onSubmit={(response) => console.log('Response received:', response)}
+    />
+  );
 };
 
 export default App;

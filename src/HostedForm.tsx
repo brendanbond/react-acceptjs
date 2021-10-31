@@ -8,13 +8,13 @@ import {
 import useScript from './useScript';
 
 const HostedForm = ({
-  environment = 'SANDBOX',
   authData,
+  onSubmit,
+  environment = 'SANDBOX',
   billingAddressOptions = { show: true, required: true },
   formButtonText = 'Pay',
   formHeaderText = 'Pay',
   paymentOptions = { showCreditCard: true, showBankAccount: false },
-  onSubmit,
   buttonStyle,
   errorTextStyle,
 }: HostedFormProps) => {
