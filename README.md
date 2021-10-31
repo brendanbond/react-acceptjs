@@ -108,8 +108,8 @@ const authData = {
 };
 
 const App = () => {
-  const handleSubmit = (opaqueData) => {
-    console.log('Received response:', opaqueData);
+  const handleSubmit = (response) => {
+    console.log('Received response:', response);
   };
   return <HostedForm authData={authData} onSubmit={handleSubmit} />;
 };
