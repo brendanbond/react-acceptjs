@@ -171,7 +171,7 @@ type DispatchDataResponse = {
 
 **Props**
 
-- **`authData`**` : _{ clientKey: string; apiLoginId: string; } (required)_` - your Authorize.net client key and API login ID
+- **`authData`**_`{ clientKey: string; apiLoginId: string; } (required)`_ - your Authorize.net client key and API login ID
 - **`onSubmit`**` : _(response: HostedFormDispatchDataFnResponse) => void (required)_` - the function that will receive and handle the response from Authorize.net (which, if successful, will include the payment nonce as well as certain encrypted CC information)
 - **`environment`**` : _'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')_` - whether you're running a sandbox or production Authorize.net account
 - **`billingAddressOptions`**` : _{ show: boolean; required: boolean } (optional, defaults to {show: true, required: true})_` - what billing information the hosted form will display and require
