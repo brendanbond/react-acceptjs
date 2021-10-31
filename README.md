@@ -117,16 +117,18 @@ const App = () => {
 
 ## API Reference
 
-`const { dispatchData, loading, error } = useAcceptJs({ environment, authData });`
+```ts
+const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
+```
 
 **Arguments:**
 
-- **`authData`**` : _{ clientKey: string; apiLoginId: string; } (required)_` - your Authorize.net client key and API login ID
-- **`environment`**` : _'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')_` - whether you're running a sandbox or production Authorize.net account
+- **`authData`**_`: { clientKey: string; apiLoginId: string; } (required)`_ - your Authorize.net client key and API login ID
+- **`environment`**_`: 'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')`_ - whether you're running a sandbox or production Authorize.net account
 
 **Return Value:**
 
-- **`dispatchData`**` : _(paymentData: { PaymentData }) => Promise<DispatchDataResponse>_` - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
+- **`dispatchData`**_`: (paymentData: { PaymentData }) => Promise<DispatchDataResponse>`_ - the `dispatchData()` function sends your payment form's payment information to Authorize.net in exchange for a payment nonce for use on your server. If you're transmitting credit card data, the `PaymentData` type consists of:
 ```ts
 type PaymentData = {
   cardData: {
@@ -167,7 +169,9 @@ type DispatchDataResponse = {
 - **`loading`**` : _boolean_` - a boolean value that indicates whether the Accept.js library is currently loading
 - **`error`**` : _boolean_` - a boolean value that indicates whether an error has occured while loading the Accept.js library
 
-`<HostedForm authData={authData} onSubmit={handleSubmit} />;`
+```tsx
+<HostedForm authData={authData} onSubmit={handleSubmit} />;
+```
 
 **Props**
 
