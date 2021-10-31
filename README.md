@@ -123,8 +123,8 @@ const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
 
 **Arguments:**
 
-- <code><b>authData</b> : <em>{ clientKey: string; apiLoginId: string; } (required)</em></code> - Required. Your Authorize.net client key and API login ID.
-- <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION' (optional, defaults to 'SANDBOX')</em></code> - Required. Indicates whether you are running a sandbox or a production Authorize.net account.
+- <code><b>authData</b> : <em>{ clientKey: string; apiLoginId: string; }</em></code> - Required. Your Authorize.net client key and API login ID.
+- <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION'</em></code> - Optional, defaults to `'SANDBOX'`. Indicates whether you are running a sandbox or a production Authorize.net account.
 
 **Return Value:**
 
@@ -184,7 +184,7 @@ type DispatchDataResponse = {
 - <code><b>billingAddressOptions</b> : <em>{ show: boolean; required: boolean }</em></code> - Optional, defaults to `{show: true, required: true}`. Indicates whether the hosted form will display and/or require billing information.
 - <code><b>formButtonText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that the payment button will display.
 - <code><b>formHeaderText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that the hosted form will display as a header.
-- <code><b>paymentOptions</b> : <em>{ showCreditCard: boolean, showBankAccount: boolean }</em></code> - Optional, defaults to `{ showCreditCard: true, showBankAccount: false }`. What payment options the hosted form will provide.`
+- <code><b>paymentOptions</b> : <em>{ showCreditCard: boolean, showBankAccount: boolean }</em></code> - Optional, defaults to `{ showCreditCard: true, showBankAccount: false }`. What payment options the hosted form will provide.
 - <code><b>buttonStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `null`. A style object for the payment button.
 - <code><b>errorTextStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `null`. A style object for the error text that displays under the payment button on error.
 
