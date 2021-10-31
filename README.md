@@ -169,7 +169,7 @@ type DispatchDataResponse = {
 };
 ```
 
-- <pre><b>loading</b> : <em>boolean</em></pre> - a boolean value that indicates whether the Accept.js library is currently loading
+- <code><b>loading</b> : <em>boolean</em></code> - a boolean value that indicates whether the Accept.js library is currently loading
 - **`error`**_`: boolean`_ - a boolean value that indicates whether an error has occured while loading the Accept.js library
 
 ```tsx
