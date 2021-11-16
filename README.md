@@ -119,73 +119,73 @@ const App = () => {
 export default App;
 ```
 
-3. Use [Accept Hosted](https://developer.authorize.net/api/reference/features/accept_hosted.html), Authorize.net's fully hosted payment solution that you can redirect your customers to or embed as an iFrame within your page. First, your server will make a request to the [`getHostedPaymentPageRequest`](https://developer.authorize.net/api/reference/index.html#accept-suite-get-an-accept-payment-page) API and receive a form token in return. Next, you'll pass this form token to the `<AcceptHosted />` component along with your authentication information. Rather than return a payment nonce for use on your server, Authorize.net will handle the entire transaction process based on options you specify in the `getHostedPaymentPageRequest` API call and return a response indicating success or failure and transaction information.
+3. Use [Accept Hosted](https://developer.authorize.net/api/reference/features/accept_hosted.html), Authorize.net's fully hosted payment solution that you can redirect your customers to or embed as an iFrame within your page. First, your server will make a request to the [`getHostedPaymentPageRequest`](https://developer.authorize.net/api/reference/index.html#accept-suite-get-an-accept-payment-page) API and receive a form token in return. Next, you'll pass this form token to the `<AcceptHosted />` component. Rather than return a payment nonce for use on your server, Authorize.net will handle the entire transaction process based on options you specify in the `getHostedPaymentPageRequest` API call and return a response indicating success or failure and transaction information.
 
-- Redirect your customers to the Accept Hosted form:
+  1. Redirect your customers to the Accept Hosted form:
 
-```tsx
-import { AcceptHosted } from 'react-acceptjs';
+  ```tsx
+  import { AcceptHosted } from 'react-acceptjs';
 
-const App = ({ formToken }: { formToken: string | null }) => {
-  return formToken ? (
-    <AcceptHosted formToken={formToken} integration="redirect" />
-  ) : (
-    <div>
-      You must have a form token. Have you made a call to the
-      getHostedPaymentPageRequestAPI?
-    </div>
-  );
-};
+  const App = ({ formToken }: { formToken: string | null }) => {
+    return formToken ? (
+      <AcceptHosted formToken={formToken} integration="redirect" />
+    ) : (
+      <div>
+        You must have a form token. Have you made a call to the
+        getHostedPaymentPageRequestAPI?
+      </div>
+    );
+  };
 
-export default App;
-```
-
-- Embed the Accept Hosted form as in iFrame lightbox modal:
-
-  - You'll need to host an JavaScript page that can receive messages from the Accept Hosted iFrame on the same domain as your app with the code below. You should pass this URL as the `hostedPaymentIFrameCommunicatorUrl` option in the `getHostedPaymentPageRequest` request you make to receive your form token. For example, in a React app created with [Create-React-App](https://github.com/facebook/create-react-app), you could put this file into the `public/` directory in order to be accessible to Accept Hosted, or place the `\<script \>` tag directly into the `public/index.html` file. Just be sure that the URL that you pass to `getHostedPaymentPageRequest` matches where this script is hosted.
-
-  ```html
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-      <title>Iframe Communicator</title>
-      <script type="text/javascript">
-        //<![CDATA[
-        function callParentFunction(str) {
-          if (
-            str &&
-            str.length > 0 &&
-            window.parent &&
-            window.parent.parent &&
-            window.parent.parent.AuthorizeNetIFrame &&
-            window.parent.parent.AuthorizeNetIFrame.onReceiveCommunication
-          ) {
-            // Errors indicate a mismatch in domain between the page containing the iframe and this page.
-            window.parent.parent.AuthorizeNetIFrame.onReceiveCommunication(str);
-          }
-        }
-
-        function receiveMessage(event) {
-          if (event && event.data) {
-            callParentFunction(event.data);
-          }
-        }
-
-        if (window.addEventListener) {
-          window.addEventListener('message', receiveMessage, false);
-        } else if (window.attachEvent) {
-          window.attachEvent('onmessage', receiveMessage);
-        }
-
-        if (window.location.hash && window.location.hash.length > 1) {
-          callParentFunction(window.location.hash.substring(1));
-        }
-        //]]/>
-      </script>
-    </head>
-    <body></body>
-  </html>
+  export default App;
   ```
+
+  2. Embed the Accept Hosted form as in iFrame lightbox modal:
+
+    1. You'll need to host an JavaScript page that can receive messages from the Accept Hosted iFrame on the same domain as your app with the code below. You should pass this URL as the `hostedPaymentIFrameCommunicatorUrl` option in the `getHostedPaymentPageRequest` request you make to receive your form token. For example, in a React app created with [Create-React-App](https://github.com/facebook/create-react-app), you could put this file into the `public/` directory in order to be accessible to Accept Hosted, or place the `\<script \>` tag directly into the `public/index.html` file. Just be sure that the URL that you pass to `getHostedPaymentPageRequest` matches where this script is hosted.
+
+    ```html
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <head>
+        <title>Iframe Communicator</title>
+        <script type="text/javascript">
+          //<![CDATA[
+          function callParentFunction(str) {
+            if (
+              str &&
+              str.length > 0 &&
+              window.parent &&
+              window.parent.parent &&
+              window.parent.parent.AuthorizeNetIFrame &&
+              window.parent.parent.AuthorizeNetIFrame.onReceiveCommunication
+            ) {
+              // Errors indicate a mismatch in domain between the page containing the iframe and this page.
+              window.parent.parent.AuthorizeNetIFrame.onReceiveCommunication(str);
+            }
+          }
+
+          function receiveMessage(event) {
+            if (event && event.data) {
+              callParentFunction(event.data);
+            }
+          }
+
+          if (window.addEventListener) {
+            window.addEventListener('message', receiveMessage, false);
+          } else if (window.attachEvent) {
+            window.attachEvent('onmessage', receiveMessage);
+          }
+
+          if (window.location.hash && window.location.hash.length > 1) {
+            callParentFunction(window.location.hash.substring(1));
+          }
+          //]]/>
+        </script>
+      </head>
+      <body></body>
+    </html>
+    ```
 
   ```tsx
   const App = ({ formToken }: { formToken: string | null }) => {
