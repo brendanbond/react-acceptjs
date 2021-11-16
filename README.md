@@ -22,123 +22,194 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 
 1. Host your own payment form and use the `dispatchData()` function exposed by the `useAcceptJs()` hook. This function returns a payment nonce which can be used by your server to process a payment in place of CC or bank account data.
 
-    ```tsx
-    import React from 'react';
-    import { useAcceptJs } from 'react-acceptjs';
+   ```tsx
+   import React from 'react';
+   import { useAcceptJs } from 'react-acceptjs';
 
-    const authData = {
-      apiLoginID: 'YOUR AUTHORIZE.NET API LOGIN ID',
-      clientKey: 'YOUR AUTHORIZE.NET PUBLIC CLIENT KEY',
-    };
+   const authData = {
+     apiLoginID: 'YOUR AUTHORIZE.NET API LOGIN ID',
+     clientKey: 'YOUR AUTHORIZE.NET PUBLIC CLIENT KEY',
+   };
 
-    type BasicCardInfo = {
-      cardNumber: string;
-      cardCode: string;
-      expMonth: string;
-      expYear: string;
-    };
+   type BasicCardInfo = {
+     cardNumber: string;
+     cardCode: string;
+     expMonth: string;
+     expYear: string;
+   };
 
-    const App = () => {
-      const { dispatchData, loading, error } = useAcceptJs({ authData });
-      const [cardData, setCardData] = React.useState<BasicCardInfo>({
-        cardNumber: '',
-        expMonth: '',
-        expYear: '',
-        cardCode: '',
-      });
+   const App = () => {
+     const { dispatchData, loading, error } = useAcceptJs({ authData });
+     const [cardData, setCardData] = React.useState<BasicCardInfo>({
+       cardNumber: '',
+       expMonth: '',
+       expYear: '',
+       cardCode: '',
+     });
 
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        // Dispatch CC data to Authorize.net and receive payment nonce for use on your server
-        const response = await dispatchData({ cardData });
-        console.log('Received response:', response);
-      };
+     const handleSubmit = async (event) => {
+       event.preventDefault();
+       // Dispatch CC data to Authorize.net and receive payment nonce for use on your server
+       const response = await dispatchData({ cardData });
+       console.log('Received response:', response);
+     };
 
-      return (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="cardNumber"
-            value={cardData.cardNumber}
-            onChange={(event) =>
-              setCardData({ ...cardData, cardNumber: event.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="expMonth"
-            value={cardData.expMonth}
-            onChange={(event) =>
-              setCardData({ ...cardData, expMonth: event.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="expYear"
-            value={cardData.expYear}
-            onChange={(event) =>
-              setCardData({ ...cardData, expYear: event.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="cardCode"
-            value={cardData.cardCode}
-            onChange={(event) =>
-              setCardData({ ...cardData, cardCode: event.target.value })
-            }
-          />
-          <button type="submit" disabled={loading || error}>
-            Pay
-          </button>
-        </form>
-      );
-    };
+     return (
+       <form onSubmit={handleSubmit}>
+         <input
+           type="text"
+           name="cardNumber"
+           value={cardData.cardNumber}
+           onChange={(event) =>
+             setCardData({ ...cardData, cardNumber: event.target.value })
+           }
+         />
+         <input
+           type="text"
+           name="expMonth"
+           value={cardData.expMonth}
+           onChange={(event) =>
+             setCardData({ ...cardData, expMonth: event.target.value })
+           }
+         />
+         <input
+           type="text"
+           name="expYear"
+           value={cardData.expYear}
+           onChange={(event) =>
+             setCardData({ ...cardData, expYear: event.target.value })
+           }
+         />
+         <input
+           type="text"
+           name="cardCode"
+           value={cardData.cardCode}
+           onChange={(event) =>
+             setCardData({ ...cardData, cardCode: event.target.value })
+           }
+         />
+         <button type="submit" disabled={loading || error}>
+           Pay
+         </button>
+       </form>
+     );
+   };
 
-    export default App;
-    ```
+   export default App;
+   ```
 
 2. Embed the hosted, mobile-optimized payment information form provided by Accept.js into your page via the `HostedForm` component. This component renders a button which, when clicked, will trigger a lightbox modal containing the hosted Accept.js form. You'll still receive the payment nonce for use on your server similar to option #1.
 
-    ```tsx
-    import React from 'react';
-    import { HostedForm } from 'react-acceptjs';
+   ```tsx
+   import React from 'react';
+   import { HostedForm } from 'react-acceptjs';
 
-    const authData = {
-      apiLoginID: 'YOUR AUTHORIZE.NET API LOGIN ID',
-      clientKey: 'YOUR AUTHORIZE.NET PUBLIC CLIENT KEY',
-    };
+   const authData = {
+     apiLoginID: 'YOUR AUTHORIZE.NET API LOGIN ID',
+     clientKey: 'YOUR AUTHORIZE.NET PUBLIC CLIENT KEY',
+   };
 
-    const App = () => {
-      const handleSubmit = (response) => {
-        console.log('Received response:', response);
-      };
-      return <HostedForm authData={authData} onSubmit={handleSubmit} />;
-    };
+   const App = () => {
+     const handleSubmit = (response) => {
+       console.log('Received response:', response);
+     };
+     return <HostedForm authData={authData} onSubmit={handleSubmit} />;
+   };
 
-    export default App;
-    ```
+   export default App;
+   ```
 
 3. Use [Accept Hosted](https://developer.authorize.net/api/reference/features/accept_hosted.html), Authorize.net's fully hosted payment solution that you can redirect your customers to or embed as an iFrame within your page. First, your server will make a request to the [`getHostedPaymentPageRequest`](https://developer.authorize.net/api/reference/index.html#accept-suite-get-an-accept-payment-page) API and receive a form token in return. Next, you'll pass this form token to the `<AcceptHosted />` component. Rather than return a payment nonce for use on your server, Authorize.net will handle the entire transaction process based on options you specify in the `getHostedPaymentPageRequest` API call and return a response indicating success or failure and transaction information.
 
-    1. Redirect your customers to the Accept Hosted form:
+   1. Redirect your customers to the Accept Hosted form:
 
-        ```tsx
-        import { AcceptHosted } from 'react-acceptjs';
+      ```tsx
+      import { AcceptHosted } from 'react-acceptjs';
 
-        const App = ({ formToken }: { formToken: string | null }) => {
-          return formToken ? (
-            <AcceptHosted formToken={formToken} integration="redirect" />
-          ) : (
-            <div>
-              You must have a form token. Have you made a call to the
-              getHostedPaymentPageRequestAPI?
-            </div>
-          );
-        };
+      const App = ({ formToken }: { formToken: string | null }) => {
+        return formToken ? (
+          <AcceptHosted formToken={formToken} integration="redirect" />
+        ) : (
+          <div>
+            You must have a form token. Have you made a call to the
+            getHostedPaymentPageRequestAPI?
+          </div>
+        );
+      };
 
-        export default App;
-        ```
+      export default App;
+      ```
+
+   2. Embed the Accept Hosted form as in iFrame lightbox modal:
+
+      1. You'll need to host an JavaScript page that can receive messages from the Accept Hosted iFrame on the same domain as your app with the code below. You should pass this URL as the `hostedPaymentIFrameCommunicatorUrl` option in the `getHostedPaymentPageRequest` request you make to receive your form token. For example, in a React app created with [Create-React-App](https://github.com/facebook/create-react-app), you could put this file into the `public/` directory in order to be accessible to Accept Hosted, or place the `\<script \>` tag directly into the `public/index.html` file. Just be sure that the URL that you pass to `getHostedPaymentPageRequest` matches where this script is hosted.
+
+         ```html
+         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+         <html xmlns="http://www.w3.org/1999/xhtml">
+           <head>
+             <title>Iframe Communicator</title>
+             <script type="text/javascript">
+               //<![CDATA[
+               function callParentFunction(str) {
+                 if (
+                   str &&
+                   str.length > 0 &&
+                   window.parent &&
+                   window.parent.parent &&
+                   window.parent.parent.AuthorizeNetIFrame &&
+                   window.parent.parent.AuthorizeNetIFrame
+                     .onReceiveCommunication
+                 ) {
+                   // Errors indicate a mismatch in domain between the page containing the iframe and this page.
+                   window.parent.parent.AuthorizeNetIFrame.onReceiveCommunication(
+                     str
+                   );
+                 }
+               }
+
+               function receiveMessage(event) {
+                 if (event && event.data) {
+                   callParentFunction(event.data);
+                 }
+               }
+
+               if (window.addEventListener) {
+                 window.addEventListener('message', receiveMessage, false);
+               } else if (window.attachEvent) {
+                 window.attachEvent('onmessage', receiveMessage);
+               }
+
+               if (window.location.hash && window.location.hash.length > 1) {
+                 callParentFunction(window.location.hash.substring(1));
+               }
+               //]]/>
+             </script>
+           </head>
+           <body></body>
+         </html>
+         ```
+
+      2. Now you can use the `<AcceptHosted />` component.
+
+         ```tsx
+         const App = ({ formToken }: { formToken: string | null }) => {
+           return formToken ? (
+             <AcceptHosted
+               formToken={formToken}
+               integration="iframe"
+               onTransactionResponse={(response) =>
+                 console.log('Response received:', response)
+               }
+             />
+           ) : (
+             <div>
+               You must have a form token. Have you made a call to the
+               getHostedPaymentPageRequestAPI?
+             </div>
+           );
+         };
+         ```
 
 ## API Reference
 
