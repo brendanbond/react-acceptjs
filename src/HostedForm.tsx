@@ -5,24 +5,23 @@ import {
   HostedFormResponseHandlerFn,
   ErrorMessage,
 } from './types';
-import useScript from './useScript';
+import useAcceptJs from './hooks/useAcceptJs';
 
 const HostedForm = ({
   authData,
   onSubmit,
   environment = 'SANDBOX',
   billingAddressOptions = { show: true, required: true },
+  buttonText = 'Pay',
   formButtonText = 'Pay',
   formHeaderText = 'Pay',
   paymentOptions = { showCreditCard: true, showBankAccount: false },
   buttonStyle,
   errorTextStyle,
+  containerStyle,
+  disabled,
 }: HostedFormProps) => {
-  const scriptUrl =
-    environment === 'PRODUCTION'
-      ? 'https://js.authorize.net/v3/AcceptUI.js'
-      : 'https://jstest.authorize.net/v3/AcceptUI.js';
-  const [scriptLoaded, scriptError] = useScript(scriptUrl);
+  const { loading, error } = useAcceptJs({ authData, environment });
   const [errors, setErrors] = React.useState<string | ErrorMessage[] | null>(
     null
   );
@@ -39,16 +38,16 @@ const HostedForm = ({
   );
 
   React.useEffect(() => {
-    if (!scriptError && scriptLoaded && !window.responseHandler)
+    if (!error && !loading && !window.responseHandler)
       window.responseHandler = responseHandler;
-    if (scriptError)
+    if (error)
       setErrors(
         'There was a problem loading the Accept.JS script. Please try again.'
       );
-  }, [scriptLoaded, scriptError, window.responseHandler]);
+  }, [loading, error, window.responseHandler]);
 
   return (
-    <div>
+    <div style={containerStyle}>
       <button
         type="button"
         style={buttonStyle}
@@ -60,13 +59,14 @@ const HostedForm = ({
         data-acceptuiformheadertxt={formHeaderText}
         data-paymentoptions={JSON.stringify(paymentOptions)}
         data-responsehandler="responseHandler"
-        disabled={scriptError || !scriptLoaded}
+        disabled={error || loading || disabled}
       >
-        Pay
+        {buttonText}
       </button>
+
       {errors &&
         (typeof errors === 'string' ? (
-          <div>{errors}</div>
+          <div style={errorTextStyle}>{errors}</div>
         ) : (
           (errors as ErrorMessage[]).map((error) => (
             <div

@@ -6,5 +6,6 @@ declare global {
       dispatchData: DispatchDataFn;
     };
     responseHandler: HostedFormResponseHandlerFn;
+    AuthorizeNetIFrame: { onReceiveCommunication: (queryStr: string) => void };
   }
 }

@@ -22,7 +22,6 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 
 ```tsx
 import React from 'react';
-
 import { useAcceptJs } from 'react-acceptjs';
 
 const authData = {
@@ -30,12 +29,12 @@ const authData = {
   clientKey: 'YOUR AUTHORIZE.NET PUBLIC CLIENT KEY',
 };
 
-interface BasicCardInfo {
+type BasicCardInfo = {
   cardNumber: string;
   cardCode: string;
   expMonth: string;
   expYear: string;
-}
+};
 
 const PaymentForm = () => {
   const { dispatchData, loading, error } = useAcceptJs({ authData });
@@ -95,11 +94,10 @@ const PaymentForm = () => {
 };
 ```
 
-2. Embed the hosted, mobile-optimized payment information form provided by Accept.js into your page via the `HostedForm` component. This component exposes a button which, when clicked, will trigger a lightbox modal containing the hosted Accept.js form. You'll still receive the payment nonce for use on your server similar to option #1.
+2. Embed the hosted, mobile-optimized payment information form provided by Accept.js into your page via the `HostedForm` component. This component renders a button which, when clicked, will trigger a lightbox modal containing the hosted Accept.js form. You'll still receive the payment nonce for use on your server similar to option #1.
 
 ```tsx
 import React from 'react';
-
 import { HostedForm } from 'react-acceptjs';
 
 const authData = {
@@ -176,7 +174,7 @@ type DispatchDataResponse = {
 - <code><b>loading</b> : <em>boolean</em></code> - Indicates whether the Accept.js library is currently loading.
 - <code><b>error</b> : <em>boolean</em></code> - Indicates whether an error has occured while loading the Accept.js library.
 
-### Component
+### Components
 
 ```tsx
 <HostedForm authData={authData} onSubmit={handleSubmit} />
@@ -188,11 +186,13 @@ type DispatchDataResponse = {
 - <code><b>onSubmit</b> : <em>(response: HostedFormDispatchDataFnResponse) => void</em></code> - Required. The function that will receive and handle the response from Authorize.net (which, if successful, will include the payment nonce as well as certain encrypted CC information).
 - <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION'</em></code> - Optional, defaults to `'SANDBOX'`. Indicates whether you're running a sandbox or production Authorize.net account.
 - <code><b>billingAddressOptions</b> : <em>{ show: boolean; required: boolean }</em></code> - Optional, defaults to `{ show: true, required: true }`. Indicates whether the hosted form will display and/or require billing information.
-- <code><b>formButtonText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that the payment button will display.
-- <code><b>formHeaderText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that the hosted form will display as a header.
+- <code><b>buttonText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that will appear on the button rendered by the component.
+- <code><b>formButtonText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that will appear on the hosted payment form's submit button.
+- <code><b>formHeaderText</b> : <em>string</em></code> - Optional, defaults to `"Pay"`. The text that will appear as a header on the hosted payment form.
 - <code><b>paymentOptions</b> : <em>{ showCreditCard: boolean, showBankAccount: boolean }</em></code> - Optional, defaults to `{ showCreditCard: true, showBankAccount: false }`. What payment options the hosted form will provide.
 - <code><b>buttonStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the payment button.
 - <code><b>errorTextStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the error text that displays under the payment button on error.
+- <code><b>containerStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the `\<div /\>` that contains the rendered button and error text.
 
 ## License
 

@@ -6,7 +6,7 @@ import {
   DispatchDataResponse,
   SecureData,
   AcceptJsHookConfig,
-} from './types';
+} from '../types';
 
 const useAcceptJs = ({
   environment = 'SANDBOX',
@@ -47,3 +47,4 @@ const useAcceptJs = ({
 };
 
 export default useAcceptJs;
+

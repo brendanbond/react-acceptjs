@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { HostedForm } from 'react-acceptjs';
+import { AcceptHosted } from 'react-acceptjs';
 
-const authData = {
-  apiLoginID: process.env.REACT_APP_API_LOGIN_ID as string,
-  clientKey: process.env.REACT_APP_API_CLIENT_KEY as string,
-};
+// const authData = {
+//   apiLoginID: process.env.REACT_APP_API_LOGIN_ID as string,
+//   clientKey: process.env.REACT_APP_API_CLIENT_KEY as string,
+// };
 
 // interface BasicCardInfo {
 //   cardNumber: string;
@@ -71,13 +71,56 @@ const authData = {
 //   );
 // };
 
+// const App = () => {
+//   return (
+//     <HostedForm
+//       authData={authData}
+//       onSubmit={(response) => console.log('Response received:', response)}
+//     />
+//   );
+// };
+
 const App = () => {
+  const [amount, setAmount] = useState<number>(0);
+  const [formToken, setFormToken] = useState<string | null>(null);
+
+  const handleGetFormToken = async () => {
+    const res = await fetch(
+      `https://localhost:3001/form-token?amount=${amount}`
+    );
+    const token = await res.text();
+    setFormToken(token);
+  };
+
   return (
-    <HostedForm
-      authData={authData}
-      onSubmit={(response) => console.log('Response received:', response)}
-    />
+    <div>
+      <div>
+        <label>
+          Amount
+          <input
+            name="amount"
+            id="amount"
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
+          />
+        </label>
+        <button onClick={handleGetFormToken}>Get Form Token</button>
+      </div>
+      {formToken && (
+        <div>
+          <AcceptHosted
+            formToken={formToken}
+            integration="iframe"
+            environment="SANDBOX"
+            onTransactionResponse={(response) =>
+              console.log('Response received:', response)
+            }
+            onCancel={() => console.log('Canceled!')}
+          />
+        </div>
+      )}
+    </div>
   );
 };
-
 export default App;
