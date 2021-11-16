@@ -123,4 +123,19 @@ const App = () => {
     </div>
   );
 };
+
+// const App = () => {
+//   const [amount, setAmount] = useState<number>(0);
+//   const [formToken, setFormToken] = useState<string | null>(null);
+
+//   const handleGetFormToken = async () => {
+//     const res = await fetch(
+//       `https://localhost:3001/form-token?amount=${amount}`
+//     );
+//     const token = await res.text();
+//     setFormToken(token);
+//   };
+
+//   return <AcceptHosted formToken={formToken} integration="redirect" />;
+// };
 export default App;

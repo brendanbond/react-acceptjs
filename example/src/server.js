@@ -31,7 +31,7 @@ const fetchFormToken = (amount) => {
   const setting3 = new ApiContracts.SettingType();
   setting3.setSettingName('hostedPaymentIFrameCommunicatorUrl');
   setting3.setSettingValue(
-    '{"url": "https://localhost:3000/index.html"}'
+    '{"url": "https://localhost:3000/iFrameCommunicator.html"}'
   );
 
   const setting4 = new ApiContracts.SettingType();
