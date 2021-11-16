@@ -121,24 +121,24 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 
 3. Use [Accept Hosted](https://developer.authorize.net/api/reference/features/accept_hosted.html), Authorize.net's fully hosted payment solution that you can redirect your customers to or embed as an iFrame within your page. First, your server will make a request to the [`getHostedPaymentPageRequest`](https://developer.authorize.net/api/reference/index.html#accept-suite-get-an-accept-payment-page) API and receive a form token in return. Next, you'll pass this form token to the `<AcceptHosted />` component. Rather than return a payment nonce for use on your server, Authorize.net will handle the entire transaction process based on options you specify in the `getHostedPaymentPageRequest` API call and return a response indicating success or failure and transaction information.
 
-  1. Redirect your customers to the Accept Hosted form:
+    1. Redirect your customers to the Accept Hosted form:
 
-    ```tsx
-    import { AcceptHosted } from 'react-acceptjs';
+        ```tsx
+        import { AcceptHosted } from 'react-acceptjs';
 
-    const App = ({ formToken }: { formToken: string | null }) => {
-      return formToken ? (
-        <AcceptHosted formToken={formToken} integration="redirect" />
-      ) : (
-        <div>
-          You must have a form token. Have you made a call to the
-          getHostedPaymentPageRequestAPI?
-        </div>
-      );
-    };
+        const App = ({ formToken }: { formToken: string | null }) => {
+          return formToken ? (
+            <AcceptHosted formToken={formToken} integration="redirect" />
+          ) : (
+            <div>
+              You must have a form token. Have you made a call to the
+              getHostedPaymentPageRequestAPI?
+            </div>
+          );
+        };
 
-    export default App;
-    ```
+        export default App;
+        ```
 
 ## API Reference
 
