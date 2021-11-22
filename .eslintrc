@@ -1,39 +1,48 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true
+  },
   "extends": [
-    "standard",
-    "standard-react",
+    "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "prettier/standard",
-    "prettier/react",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "react-hooks"
+    "plugin:react-hooks/recommended"
   ],
-  "env": {
-    "node": true
-  },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020,
     "ecmaFeatures": {
-      "legacyDecorators": true,
       "jsx": true
-    }
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
-  "settings": {
-    "react": {
-      "version": "16"
-    }
-  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
   "rules": {
-    "space-before-function-paren": 0,
-    "react/prop-types": 0,
-    "react/jsx-handler-names": 0,
-    "react/jsx-fragments": 0,
-    "react/no-unused-prop-types": 0,
-    "import/export": 0,
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "import/extensions": ["warn", "never"],
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }
