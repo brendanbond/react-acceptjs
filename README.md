@@ -128,7 +128,9 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 
       const App = ({ formToken }: { formToken: string | null }) => {
         return formToken ? (
-          <AcceptHosted formToken={formToken} integration="redirect" />
+          <AcceptHosted formToken={formToken} integration="redirect">
+            Continue to Redirect
+          </AcceptHosted>
         ) : (
           <div>
             You must have a form token. Have you made a call to the
@@ -199,9 +201,17 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
                formToken={formToken}
                integration="iframe"
                onTransactionResponse={(response) =>
-                 console.log('Response received:', response)
+                 setResponse(JSON.stringify(response, null, 2) + '\n')
                }
-             />
+             >
+               <AcceptHosted.Button className="btn btn-primary">
+                 Continue to IFrame
+               </AcceptHosted.Button>
+               <AcceptHosted.IFrameBackdrop />
+               <AcceptHosted.IFrameContainer>
+                 <AcceptHosted.IFrame />
+               </AcceptHosted.IFrameContainer>
+             </AcceptHosted>
            ) : (
              <div>
                You must have a form token. Have you made a call to the
@@ -209,7 +219,11 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
              </div>
            );
          };
+
+         export default App;
          ```
+
+      3. A note on styling: a goal of this library is to invert control of the UI to the developer. Each of the `<AcceptHosted />` compound compontents (`<Button />`, `<IFrameBackdrop />`, `<IFrameContainer />, and `<IFrame />`) have both `className`and`style` object props, allowing the default styles to be overridden. _At this moment, this is not recommended._
 
 ## API Reference
 
@@ -218,6 +232,10 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 ```ts
 const { dispatchData, loading, error } = useAcceptJs({ environment, authData });
 ```
+
+**Description**
+
+A React hook that loads the appropriate Accept.js script and exposes the `dispatchData()` function for retrieving a payment nonce for use on your server.
 
 **Arguments:**
 
@@ -276,6 +294,10 @@ type DispatchDataResponse = {
 <HostedForm authData={authData} onSubmit={handleSubmit} />
 ```
 
+**Description**
+
+A React component that loads the appropriate Accept.js script and renders a button that will trigger a hosted PCI-DSS SAQ A compliant form that, when submitted, will return a payment nonce for use on your server.
+
 **Props**
 
 - <code><b>authData</b> : <em>{ clientKey: string; apiLoginId: string; }</em></code> - Required. Your Authorize.net client key and API login ID.
@@ -290,6 +312,54 @@ type DispatchDataResponse = {
 - <code><b>errorTextStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the error text that displays under the payment button on error.
 - <code><b>containerStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the `\<div /\>` that contains the rendered button and error text.
 
+```tsx
+<AcceptHosted formToken={formToken} integraton="redirect">
+  {children}
+</AcceptHosted>
+```
+
+```tsx
+<AcceptHosted
+  formToken={formToken}
+  integration="iframe"
+  onTransactionResponse={handleTransactionResponse}
+/>
+```
+
+**Description**
+
+A React component that will render Authorize.net's fully hosted PCI-DSS SAQ A compliant payment solution. Can be rendered either as a redirect (i.e. the user clicks a button and is redirected to the form page) or as an embedded iFrame on your payment page.
+
+**Props**
+
+- <code><b>formToken</b> : <em>string</em></code> - Required. The form token returned by the Authorize.net `getHostedPaymentPageRequest` API. See above for details.
+- <code><b>integration</b> : <em>'iframe' | 'redirect'</em></code> - Required. How the hosted payment form is rendered and displayed to the user (i.e. as a redirect or as an embedded iframe).
+- <code><b>onTransactionResponse</b> : <em>(response: AcceptHostedTransactionResponse) => void;</em></code> - Required ("iframe" initegration). Callback function for a successful transaction response from Authorize.net. Please note that you must set <code>showReceipt</code> to false in the <code>hostedPaymentReturnOptions</code> of the <code>getHostedPaymentPageRequest</code> API call to receive a transaction response.
+- <code><b>environment</b> : <em>'SANDBOX' | 'PRODUCTION'</em></code> - Optional, defaults to `'SANDBOX'`. Indicates whether you're running a sandbox or production Authorize.net account.
+- <code><b>onCancel</b> : <em>() => void;</em></code> - Optional ("iframe" integration). Callback function for a user-initiated cancel event (i.e. the user clicks the "Cancel" button on the hosted form).
+- <code><b>onSuccessfulSave</b> : <em>() => void</em></code> - Optional ("iframe" integration). For "iframe" integration only. Callback function for a "successful save," which may be deprecated as the Authorize.net documentation doesn't specify what this is.
+- <code><b>onResize</b> : <em>(width: number, height: number) => void</em></code> - Optional ("iframe" integration). For "iframe" integration only. Callback function for a "resize" event, in which Authorize.net will suggest a new width and height for the embedded iFrame.
+- <code><b>children</b> : <em>React.ReactNode</em></code> - Required ("redirect" integration). The content of the button that will trigger the redirect to the hosted payment form.
+- <code><b>children</b> : <em>React.ReactNode</em></code> - Required ("iframe" integration). The content of the button that will trigger the iframe that contains the hosted payment form, as well as the components that style and layout the iframe lightbox (see below).
+
+```tsx
+<AcceptHosted.Button>
+  Continue to IFrame
+</AcceptHosted.Button>
+<AcceptHosted.IFrameBackdrop />
+<AcceptHosted.IFrameContainer>
+  <AcceptHosted.IFrame />
+</AcceptHosted.IFrameContainer>
+```
+
+**Description**
+
+- The compound components that control the layout/styling of the embedded iFrame. `<AcceptHosted.Button /`> will render the button that will trigger the lightbox modal, `<AcceptHosted.IFrameBackdrop />` will render the backdrop behind the lightbox, `<AcceptHosted.IFrameContainer />` wraps the iFrame content, and `<AcceptHosted.IFrame />` contains the iFrame itself. These components cannot be rendered outside of an `<AcceptHosted />` component.
+
+```tsx
+<AcceptHosted.IFrameContainer>{children}</AcceptHosted.IFrameContainer>
+```
 ## License
 
 MIT © [brendanbond](https://github.com/brendanbond)
+```
