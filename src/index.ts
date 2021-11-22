@@ -1,7 +1,39 @@
 import useAcceptJs from './hooks/useAcceptJs';
-import HostedForm from './HostedForm';
+import HostedForm from './HostedForm/HostedForm';
 import AcceptHosted from './AcceptHosted';
-import { AuthNetEnvironment, AuthData } from './types';
+import {
+  DispatchDataFn,
+  DispatchDataResponse,
+  AcceptHostedIFrameIntegrationProps,
+  AcceptHostedProps,
+  AcceptHostedTransactionResponse,
+  AcceptHostedRedirectIntegrationProps,
+  AcceptJsHookConfig,
+  AuthData,
+  BankData,
+  PaymentData,
+  CardData,
+  HostedFormDispatchDataResponse,
+  HostedFormProps,
+  HostedFormResponseHandlerFn,
+  AcceptHostedComposition,
+} from './types';
 
 export { useAcceptJs, HostedForm, AcceptHosted };
-export type { AuthNetEnvironment, AuthData };
+export type {
+  DispatchDataFn,
+  DispatchDataResponse,
+  AcceptHostedIFrameIntegrationProps,
+  AcceptHostedProps,
+  AcceptHostedTransactionResponse,
+  AcceptHostedRedirectIntegrationProps,
+  AcceptJsHookConfig,
+  AuthData,
+  BankData,
+  PaymentData,
+  CardData,
+  HostedFormDispatchDataResponse,
+  HostedFormProps,
+  HostedFormResponseHandlerFn,
+  AcceptHostedComposition,
+};
