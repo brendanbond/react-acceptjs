@@ -1,15 +1,19 @@
-import * as React from 'react';
+import React from 'react';
 
 import { AcceptHostedRedirectIntegrationProps } from '../../types';
 
-const RedirectIntegration = ({
+export const RedirectIntegration = ({
   formToken,
   postUrl,
-  buttonText,
+  children,
+  className,
+  style,
 }: AcceptHostedRedirectIntegrationProps) => (
   <form method="post" action={postUrl}>
     <input type="hidden" name="token" value={formToken} />
-    <button id="btnContinue">{buttonText}</button>
+    <button className={className} style={className ? {} : style}>
+      {children}
+    </button>
   </form>
 );
 
