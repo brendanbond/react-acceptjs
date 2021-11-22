@@ -47,4 +47,3 @@ const useAcceptJs = ({
 };
 
 export default useAcceptJs;
-

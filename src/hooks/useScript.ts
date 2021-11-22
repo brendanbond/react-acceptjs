@@ -4,7 +4,7 @@ const cachedScripts: string[] = [];
 
 function useScript(
   url: string,
-  async: boolean = true,
+  async = true,
   appendToHeadOrBody: 'head' | 'body' = 'head'
 ) {
   const [state, setState] = React.useState({
@@ -56,7 +56,7 @@ function useScript(
       };
     }
     return undefined;
-  }, [url, async]);
+  }, [url, async, appendToHeadOrBody]);
 
   return [state.loaded, state.error];
 }
