@@ -1,3 +1,3 @@
-import RedirectIntegration from "./RedirectIntegration";
+import RedirectIntegration from './RedirectIntegration';
 
 export default RedirectIntegration;

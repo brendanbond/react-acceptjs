@@ -1,3 +1,15 @@
-import IFrameIntegration from './IFrameIntegration';
+import {
+  IFrameIntegration,
+  IFrameIntegrationButton,
+  IFrameContainer,
+  IFrameBackdrop,
+  IFrame,
+} from './IFrameIntegration';
 
-export default IFrameIntegration;
+export {
+  IFrameIntegration,
+  IFrameIntegrationButton,
+  IFrameContainer,
+  IFrameBackdrop,
+  IFrame,
+};
