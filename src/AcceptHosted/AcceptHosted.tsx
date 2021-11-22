@@ -1,9 +1,15 @@
 import * as React from 'react';
 import RedirectIntegration from './RedirectIntegration';
-import IFrameIntegration from './IFrameIntegration';
-import { AcceptHostedProps } from '../types';
+import {
+  IFrameIntegration,
+  IFrameIntegrationButton,
+  IFrameContainer,
+  IFrame,
+  IFrameBackdrop,
+} from './IFrameIntegration';
+import { AcceptHostedProps, AcceptHostedComposition } from '../types';
 
-const AcceptHosted = (props: AcceptHostedProps) => {
+const AcceptHosted: AcceptHostedComposition = (props: AcceptHostedProps) => {
   const postUrl =
     props.environment === 'PRODUCTION'
       ? 'https://accept.authorize.net/payment/payment'
@@ -11,11 +17,9 @@ const AcceptHosted = (props: AcceptHostedProps) => {
 
   if (props.integration === 'redirect') {
     return (
-      <RedirectIntegration
-        formToken={props.formToken}
-        postUrl={postUrl}
-        buttonText={props.buttonText || 'Continue'}
-      />
+      <RedirectIntegration formToken={props.formToken} postUrl={postUrl}>
+        {props.children}
+      </RedirectIntegration>
     );
   }
   if (props.integration === 'iframe') {
@@ -27,10 +31,17 @@ const AcceptHosted = (props: AcceptHostedProps) => {
         onCancel={props.onCancel}
         onResize={props.onResize}
         onSuccessfulSave={props.onSuccessfulSave}
-      />
+      >
+        {props.children}
+      </IFrameIntegration>
     );
   }
   return null;
 };
+
+AcceptHosted.Button = IFrameIntegrationButton;
+AcceptHosted.IFrameContainer = IFrameContainer;
+AcceptHosted.IFrameBackdrop = IFrameBackdrop;
+AcceptHosted.IFrame = IFrame;
 
 export default AcceptHosted;
