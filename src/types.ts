@@ -12,8 +12,8 @@ export type AuthData = {
 };
 export type CardData = {
   cardNumber: string;
-  expMonth: string;
-  expYear: string;
+  month: string;
+  year: string;
   cardCode?: string;
   zip?: string;
   fullName?: string;
@@ -59,7 +59,6 @@ export type HostedFormResponseHandlerFn = (
 ) => void;
 
 export type HostedFormProps = {
-  children: React.ReactNode;
   authData: AuthData;
   onSubmit: HostedFormResponseHandlerFn;
   environment?: AuthNetEnvironment;
@@ -68,6 +67,9 @@ export type HostedFormProps = {
   formButtonText?: string;
   formHeaderText?: string;
   paymentOptions?: { showCreditCard: boolean; showBankAccount: boolean };
+  buttonClassName?: string;
+  errorTextClassName?: string;
+  containerClassName?: string;
   buttonStyle?: React.CSSProperties;
   errorTextStyle?: React.CSSProperties;
   containerStyle?: React.CSSProperties;
@@ -96,11 +98,11 @@ type AcceptHostedIFrameCallbackProps = {
 type AcceptHostedCommonProps = {
   formToken: string;
   environment?: AuthNetEnvironment;
+  children: React.ReactNode;
 };
 
 type AcceptHostedRedirectProps = AcceptHostedCommonProps & {
   integration: 'redirect';
-  buttonText?: string;
 };
 type AcceptHostedIFrameProps = AcceptHostedCommonProps &
   AcceptHostedIFrameCallbackProps & {
@@ -113,11 +115,13 @@ export type AcceptHostedProps =
 type AcceptHostedCommonIntegrationProps = {
   formToken: string;
   postUrl: string;
+  children: React.ReactNode;
 };
 
 export type AcceptHostedRedirectIntegrationProps =
   AcceptHostedCommonIntegrationProps & {
-    buttonText: string;
+    style?: React.CSSProperties;
+    className?: string;
   };
 
 export type AcceptHostedIFrameIntegrationProps =
@@ -222,3 +226,29 @@ export type AcceptHostedTransactionResponse = {
     };
   };
 };
+
+export type AcceptHostedComposition = React.FC<AcceptHostedProps> & {
+  Button: React.FC<CompoundComponentWithChildrenProps>;
+  IFrameContainer: React.FC<CompoundComponentWithChildrenProps>;
+  IFrameBackdrop: React.FC<CompoundComponentCommonProps>;
+  IFrame: React.FC<CompoundComponentCommonProps>;
+};
+
+type IntegrationContextCommonProps = { formToken: string; postUrl: string };
+
+export type IFrameIntegrationContext = IntegrationContextCommonProps & {
+  popupIsShown: boolean;
+  popupRef: React.RefObject<HTMLDivElement>;
+  handleShowPopup: () => void;
+  handleClosePopup: () => void;
+};
+
+export type CompoundComponentCommonProps = {
+  className?: string;
+  style?: React.CSSProperties;
+};
+
+export type CompoundComponentWithChildrenProps =
+  CompoundComponentCommonProps & {
+    children: React.ReactNode;
+  };
