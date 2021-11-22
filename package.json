@@ -1,7 +1,7 @@
 {
   "name": "react-acceptjs",
   "version": "0.1.1",
-  "description": "A lightweight, modern React implementation of Authorize.net&#x27;s Accept.JS library for easily submitting credit card information to the Authorize.net platform.",
+  "description": "A lightweight, modern React implementation of Authorize.net's Accept.JS library for easily submitting credit card information to the Authorize.net platform.",
   "author": "brendanbond",
   "license": "MIT",
   "repository": "brendanbond/react-acceptjs",
