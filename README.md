@@ -144,7 +144,7 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 
    2. Embed the Accept Hosted form as in iFrame lightbox modal:
 
-      1. You'll need to host an JavaScript page that can receive messages from the Accept Hosted iFrame on the same domain as your app with the code below. You should pass this URL as the `hostedPaymentIFrameCommunicatorUrl` option in the `getHostedPaymentPageRequest` request you make to receive your form token. For example, in a React app created with [Create-React-App](https://github.com/facebook/create-react-app), you could put this file into the `public/` directory in order to be accessible to Accept Hosted, or place the `\<script \>` tag directly into the `public/index.html` file. Just be sure that the URL that you pass to `getHostedPaymentPageRequest` matches where this script is hosted.
+      1. You'll need to host an JavaScript page that can receive messages from the Accept Hosted iFrame on the same domain as your app with the code below. You should pass this URL as the `hostedPaymentIFrameCommunicatorUrl` option in the `getHostedPaymentPageRequest` request you make to receive your form token. For example, in a React app created with [Create-React-App](https://github.com/facebook/create-react-app), you could put this file into the `public/` directory in order to be accessible to Accept Hosted, or place the `<script />` tag directly into the `public/index.html` file. Just be sure that the URL that you pass to `getHostedPaymentPageRequest` matches where this script is hosted.
 
          ```html
          <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
