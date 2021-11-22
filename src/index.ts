@@ -17,6 +17,7 @@ import {
   HostedFormProps,
   HostedFormResponseHandlerFn,
   AcceptHostedComposition,
+  AuthNetEnvironment,
 } from './types';
 
 export { useAcceptJs, HostedForm, AcceptHosted };
@@ -36,4 +37,5 @@ export type {
   HostedFormProps,
   HostedFormResponseHandlerFn,
   AcceptHostedComposition,
+  AuthNetEnvironment,
 };
