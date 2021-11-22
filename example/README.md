@@ -1,5 +1,1 @@
-This example was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-It is linked to the react-acceptjs package in the parent directory for development purposes.
-
-You can run `yarn install` and then `yarn start` to test your package.
+A minimimal React app starter that includes typescript, eslint, prettier, and styled-components.

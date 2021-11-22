@@ -30,14 +30,12 @@ const fetchFormToken = (amount) => {
 
   const setting3 = new ApiContracts.SettingType();
   setting3.setSettingName('hostedPaymentIFrameCommunicatorUrl');
-  setting3.setSettingValue(
-    '{"url": "https://localhost:3000/iFrameCommunicator.html"}'
-  );
+  setting3.setSettingValue(`{"url": "${process.env.IFRAME_COMMUNICATOR_URL}"}`);
 
   const setting4 = new ApiContracts.SettingType();
   setting4.setSettingName('hostedPaymentReturnOptions');
   setting4.setSettingValue(
-    '{"showReceipt": false, "url": "https://localhost:3000/receipt", "urlText": "Continue", "cancelUrl": "https://localhost:3000/cancel", "cancelUrlText": "Cancel"}'
+    '{"show": false, "url": "https://localhost:3000?receipt=true", "urlText": "Continue", "cancelUrl": "https://localhost:3000?cancel=true", "cancelUrlText": "Cancel"}'
   );
 
   const settingList = [];
@@ -97,12 +95,12 @@ const handleFormTokenRequest = async (req, res) => {
       res.status(200).send(token);
     }
   } catch (e) {
-    console.error(e);
+    res.send(e);
   }
 };
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://localhost:3000'],
+  origin: ['https://localhost:3000'],
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
@@ -110,7 +108,7 @@ app.use(cors(corsOptions));
 
 app.get('/form-token', handleFormTokenRequest);
 
-const port = process.env.PORT || 3001;
+const port = process.env.SERVER_PORT || 3001;
 
 if (process.env.HTTPS === 'true') {
   const cert = fs.readFileSync(process.env.SSL_CRT_FILE);
