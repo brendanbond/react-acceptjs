@@ -223,7 +223,7 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
          export default App;
          ```
 
-      3. A note on styling: a goal of this library is to invert control of the UI to the developer. Each of the `<AcceptHosted />` compound compontents (`<Button />`, `<IFrameBackdrop />`, `<IFrameContainer />, and `<IFrame />`) have both `className`and`style` object props, allowing the default styles to be overridden. _At this moment, this is not recommended._
+      3. A note on styling: a goal of this library is to invert control of the UI to the developer. Each of the `<AcceptHosted />` compound compontents (`<Button />`, `<IFrameBackdrop />`, `<IFrameContainer />`, and `<IFrame />`) have both `className` and `style` object props, allowing the default styles to be overridden. _At this moment, this is not recommended._
 
 ## API Reference
 
