@@ -1,6 +1,6 @@
 # react-acceptjs
 
-> A zero dependency modern React implementation of Authorize.net&#x27;s [Accept.JS library](https://developer.authorize.net/api/reference/features/acceptjs.html) for easily submitting payments to the Authorize.net platform.
+> A lightweight modern React implementation of Authorize.net&#x27;s [Accept.JS library](https://developer.authorize.net/api/reference/features/acceptjs.html) for easily submitting payments to the Authorize.net platform.
 
 [![NPM](https://img.shields.io/npm/v/react-acceptjs.svg)](https://www.npmjs.com/package/react-acceptjs) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
