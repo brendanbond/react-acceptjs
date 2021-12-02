@@ -290,6 +290,8 @@ type DispatchDataResponse = {
 
 ### Components
 
+**&lt;HostedForm /&gt;**
+
 ```tsx
 <HostedForm authData={authData} onSubmit={handleSubmit} />
 ```
@@ -311,6 +313,8 @@ A React component that loads the appropriate Accept.js script and renders a butt
 - <code><b>buttonStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the payment button.
 - <code><b>errorTextStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the error text that displays under the payment button on error.
 - <code><b>containerStyle</b> : <em>React.CSSProperties</em></code> - Optional, defaults to `undefined`. A style object for the `\<div /\>` that contains the rendered button and error text.
+
+**&lt;AcceptHosted /&gt;**
 
 ```tsx
 <AcceptHosted formToken={formToken} integraton="redirect">
@@ -358,7 +362,7 @@ A React component that will render Authorize.net's fully hosted PCI-DSS SAQ A co
 
 ## Alternatives
 
-For a similar library with opinionated styles, check out [react-authorizenet](https://github.com/j-em/react-authorize-net). 
+For a similar library with opinionated styles, check out [react-authorizenet](https://github.com/j-em/react-authorize-net).
 ## License
 
 MIT © [brendanbond](https://github.com/brendanbond)
