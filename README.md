@@ -187,7 +187,7 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
                }
                //]]/>
              </script>
-           </head>
+             <meta name="robots" content="noindex,nofollow" />
            <body></body>
          </html>
          ```
