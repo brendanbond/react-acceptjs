@@ -34,16 +34,16 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
    type BasicCardInfo = {
      cardNumber: string;
      cardCode: string;
-     expMonth: string;
-     expYear: string;
+     month: string;
+     year: string;
    };
 
    const App = () => {
      const { dispatchData, loading, error } = useAcceptJs({ authData });
      const [cardData, setCardData] = React.useState<BasicCardInfo>({
        cardNumber: '',
-       expMonth: '',
-       expYear: '',
+       month: '',
+       year: '',
        cardCode: '',
      });
 
@@ -66,18 +66,18 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
          />
          <input
            type="text"
-           name="expMonth"
-           value={cardData.expMonth}
+           name="month"
+           value={cardData.month}
            onChange={(event) =>
-             setCardData({ ...cardData, expMonth: event.target.value })
+             setCardData({ ...cardData, month: event.target.value })
            }
          />
          <input
            type="text"
-           name="expYear"
-           value={cardData.expYear}
+           name="year"
+           value={cardData.year}
            onChange={(event) =>
-             setCardData({ ...cardData, expYear: event.target.value })
+             setCardData({ ...cardData, year: event.target.value })
            }
          />
          <input
@@ -250,8 +250,8 @@ A React hook that loads the appropriate Accept.js script and exposes the `dispat
 type PaymentData = {
   cardData: {
     cardNumber: string;
-    expMonth: string;
-    expYear: string;
+    month: string;
+    year: string;
     cardCode: string;
   };
 };
