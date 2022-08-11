@@ -358,7 +358,7 @@ A React component that will render Authorize.net's fully hosted PCI-DSS SAQ A co
 
 **Description**
 
-- The compound components that control the layout/styling of the embedded iFrame. `<AcceptHosted.Button /`> will render the button that will trigger the lightbox modal, `<AcceptHosted.IFrameBackdrop />` will render the backdrop behind the lightbox, `<AcceptHosted.IFrameContainer />` wraps the iFrame content, and `<AcceptHosted.IFrame />` contains the iFrame itself. These components cannot be rendered outside of an `<AcceptHosted />` component.
+The compound components that control the layout/styling of the embedded iFrame. `<AcceptHosted.Button /`> will render the button that will trigger the lightbox modal, `<AcceptHosted.IFrameBackdrop />` will render the backdrop behind the lightbox, `<AcceptHosted.IFrameContainer />` wraps the iFrame content, and `<AcceptHosted.IFrame />` contains the iFrame itself. These components cannot be rendered outside of an `<AcceptHosted />` component.
 
 ## Alternatives
 
@@ -366,4 +366,3 @@ For a similar library with opinionated styles, check out [react-authorizenet](ht
 ## License
 
 MIT © [brendanbond](https://github.com/brendanbond)
-```
