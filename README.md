@@ -16,7 +16,7 @@ yarn add react-acceptjs
 
 ## Getting Started
 
-Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/api/reference/features/acceptjs.html), there are three options for sending secure payment data to the Authorize.net platform (rather than transmitting sensitive credit card data to your server).
+Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/api/reference/features/acceptjs.html), there are three options for sending secure payment data to the Authorize.net platform (rather than transmitting sensitive credit card data to your server). You can follow along by building and running the example app located in the `example` directory.
 
 **Please note that Accept.js and Authorize.net require an HTTPS connection.**
 
