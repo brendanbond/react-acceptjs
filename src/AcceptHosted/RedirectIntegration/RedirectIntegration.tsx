@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AcceptHostedRedirectIntegrationProps } from '../../types';
 
 export const RedirectIntegration = ({

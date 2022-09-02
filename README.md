@@ -23,7 +23,6 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 1. Host your own payment form and use the `dispatchData()` function exposed by the `useAcceptJs()` hook. This function returns a payment nonce which can be used by your server to process a payment in place of CC or bank account data.
 
    ```tsx
-   import React from 'react';
    import { useAcceptJs } from 'react-acceptjs';
 
    const authData = {
@@ -101,7 +100,6 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
 2. Embed the hosted, mobile-optimized payment information form provided by Accept.js into your page via the `HostedForm` component. This component renders a button which, when clicked, will trigger a lightbox modal containing the hosted Accept.js form. You'll still receive the payment nonce for use on your server similar to option #1.
 
    ```tsx
-   import React from 'react';
    import { HostedForm } from 'react-acceptjs';
 
    const authData = {

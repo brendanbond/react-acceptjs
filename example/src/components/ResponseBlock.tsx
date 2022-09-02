@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ResponseBlock = ({ response }: { response: string }) => {
   return (
     <>

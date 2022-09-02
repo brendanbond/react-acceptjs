@@ -1,4 +1,3 @@
-import * as React from 'react';
 import RedirectIntegration from './RedirectIntegration';
 import {
   IFrameIntegration,

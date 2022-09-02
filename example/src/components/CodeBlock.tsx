@@ -1,4 +1,3 @@
-import React from 'react';
 import usePrism from '../hooks/usePrism';
 
 const CodeBlock = ({
