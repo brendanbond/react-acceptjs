@@ -15,13 +15,7 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
-    "serve": "node -r dotenv/config src/server.js",
-    "lint": "eslint --ignore-path .gitignore",
-    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json)\"",
-    "format": "yarn prettier -- --write",
-    "check-format": "yarn prettier -- --list-different",
-    "validate": "yarn check-format && yarn lint && yarn build",
-    "component": "ts-node util/createComponent.ts"
+    "serve": "node -r dotenv/config src/server.js"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.1.6",
