@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "outDir": "./build/",
     "preserveConstEnums": true,
