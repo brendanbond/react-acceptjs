@@ -1,14 +1,13 @@
-const AuthorizeNet = require('authorizenet');
-const cors = require('cors');
-const express = require('express');
-const app = express();
-const https = require('https');
-const fs = require('fs');
+import AuthorizeNet from 'authorizenet';
+import cors from 'cors';
+import express, { Request, Response } from 'express';
+import https from 'https';
+import fs from 'fs';
 
 const ApiContracts = AuthorizeNet.APIContracts;
 const ApiControllers = AuthorizeNet.APIControllers;
 
-const fetchFormToken = (amount) => {
+const fetchFormToken = (amount: number) => {
   const merchantAuthenticationType =
     new ApiContracts.MerchantAuthenticationType();
   merchantAuthenticationType.setName(process.env.API_LOGIN_ID);
@@ -86,7 +85,7 @@ const fetchFormToken = (amount) => {
   });
 };
 
-const handleFormTokenRequest = async (req, res) => {
+const handleFormTokenRequest = async (req: Request, res: Response) => {
   const { amount } = req.query;
 
   try {
@@ -98,6 +97,8 @@ const handleFormTokenRequest = async (req, res) => {
     res.send(e);
   }
 };
+
+const app = express();
 
 const corsOptions = {
   origin: ['https://localhost:3000'],
