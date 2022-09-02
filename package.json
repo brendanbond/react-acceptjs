@@ -14,9 +14,7 @@
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "lint": "eslint . --fix",
-    "prepare": "yarn build",
-    "predeploy": "cd example && yarn install && yarn run build"
+    "lint": "eslint . --fix"
   },
   "peerDependencies": {
     "react": "16.8.0 - 18"
@@ -36,7 +34,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.31.1",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "microbundle-crl": "^0.13.10",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
