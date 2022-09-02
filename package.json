@@ -19,7 +19,7 @@
     "predeploy": "cd example && yarn install && yarn run build"
   },
   "peerDependencies": {
-    "react": "16.8.0 - 17"
+    "react": "16.8.0 - 18"
   },
   "devDependencies": {
     "@types/node": "^12.12.38",
