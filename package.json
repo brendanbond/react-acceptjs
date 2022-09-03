@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "start": "rollup -c --watch",
     "lint": "eslint . --fix"
   },
   "peerDependencies": {

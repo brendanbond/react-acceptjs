@@ -45,7 +45,6 @@ module.exports = {
       type: process.env.HTTPS ? 'https' : 'http',
       options: process.env.HTTPS
         ? {
-            ca: process.env.SSL_CA_FILE || '',
             key: process.env.SSL_KEY_FILE,
             cert: process.env.SSL_CRT_FILE,
           }

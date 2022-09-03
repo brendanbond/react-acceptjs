@@ -100,9 +100,10 @@ const App = () => {
           may have to restart the development server). You&apos;ll also need to
           transact with Authorize.net using HTTPS, so we&apos;ll set{' '}
           <code>HTTPS</code> to <code>true</code>; you&poas;ll need to provide
-          your own SSL key and certificate using the <code>SSL_CRT_FILE</code>,{' '}
-          <code>SSL_KEY_FILE</code>, and <code>SSL_CA_FILE</code> environment
-          variables (you can read more <a href="#TODO">here</a>):
+          your own SSL key and certificate using the <code>SSL_CRT_FILE</code>{' '}
+          and the
+          <code>SSL_KEY_FILE</code> environment variables (you can read more{' '}
+          <a href="https://web.dev/how-to-use-local-https/">here</a>):
         </div>
         <CodeBlock language="bash">
           {`API_CLIENT_KEY='YOUR AUTHORIZE.NET CLIENT KEY HERE'

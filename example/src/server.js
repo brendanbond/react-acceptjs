@@ -1,13 +1,13 @@
-import AuthorizeNet from 'authorizenet';
-import cors from 'cors';
-import express, { Request, Response } from 'express';
-import https from 'https';
-import fs from 'fs';
+const AuthorizeNet = require('authorizenet');
+const cors = require('cors');
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
 
 const ApiContracts = AuthorizeNet.APIContracts;
 const ApiControllers = AuthorizeNet.APIControllers;
 
-const fetchFormToken = (amount: number) => {
+const fetchFormToken = (amount) => {
   const merchantAuthenticationType =
     new ApiContracts.MerchantAuthenticationType();
   merchantAuthenticationType.setName(process.env.API_LOGIN_ID);
@@ -34,7 +34,7 @@ const fetchFormToken = (amount: number) => {
   const setting4 = new ApiContracts.SettingType();
   setting4.setSettingName('hostedPaymentReturnOptions');
   setting4.setSettingValue(
-    '{"show": false, "url": "https://localhost:3000?receipt=true", "urlText": "Continue", "cancelUrl": "https://localhost:3000?cancel=true", "cancelUrlText": "Cancel"}'
+    '{"showReceipt": false, "url": "https://localhost:3000?receipt=true", "urlText": "Continue", "cancelUrl": "https://localhost:3000?cancel=true", "cancelUrlText": "Cancel"}'
   );
 
   const settingList = [];
@@ -85,7 +85,7 @@ const fetchFormToken = (amount: number) => {
   });
 };
 
-const handleFormTokenRequest = async (req: Request, res: Response) => {
+const handleFormTokenRequest = async (req, res) => {
   const { amount } = req.query;
 
   try {
