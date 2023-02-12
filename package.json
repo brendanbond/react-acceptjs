@@ -12,7 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --bundleConfigAsCjs",
     "start": "rollup -c --watch",
     "lint": "eslint . --fix"
   },
