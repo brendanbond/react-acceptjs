@@ -108,9 +108,9 @@ Per Authorize.net's [Accept.js documentation](https://developer.authorize.net/ap
    };
 
    const App = () => {
-     const handleSubmit = (response) => {
+     const handleSubmit = React.useCallback((response) => {
        console.log('Received response:', response);
-     };
+     }, []);
      return <HostedForm authData={authData} onSubmit={handleSubmit} />;
    };
 
