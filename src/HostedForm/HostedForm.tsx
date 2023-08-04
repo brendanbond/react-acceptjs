@@ -52,7 +52,7 @@ const HostedForm = ({
   );
 
   React.useEffect(() => {
-    if (!scriptError && !loading && !window.responseHandler)
+    if (!scriptError && !loading)
       window.responseHandler = responseHandler;
     if (scriptError)
       setErrors(
