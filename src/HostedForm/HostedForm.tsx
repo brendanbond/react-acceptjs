@@ -52,8 +52,9 @@ const HostedForm = ({
   );
 
   React.useEffect(() => {
-    if (!scriptError && !loading)
+    if (!scriptError && !loading) {
       window.responseHandler = responseHandler;
+    }
     if (scriptError)
       setErrors(
         'There was a problem loading the Accept.JS script. Please try again.'
