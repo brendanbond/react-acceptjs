@@ -243,7 +243,6 @@ export const IFrame = ({ className, style }: CompoundComponentCommonProps) => {
       name="iframeAuthorizeNet"
       id="iframeAuthorizeNet"
       frameBorder="0"
-      scrolling="no"
       width="100%"
       height="100%"
       className={className}
