@@ -5,7 +5,7 @@ import {
   HostedFormResponseHandlerFn,
   ErrorMessage,
 } from '../types';
-import useScript from '../hooks/useScript';
+import useDynamicScript from '../hooks/useDynamicScript';
 
 const HostedForm = ({
   authData,
@@ -29,7 +29,7 @@ const HostedForm = ({
     environment === 'PRODUCTION'
       ? 'https://js.authorize.net/v3/AcceptUI.js'
       : 'https://jstest.authorize.net/v3/AcceptUI.js';
-  const [scriptLoaded, scriptError] = useScript(scriptUrl);
+  const [scriptLoaded, scriptError] = useDynamicScript(scriptUrl);
 
   React.useEffect(() => {
     if (scriptLoaded || scriptError) {
