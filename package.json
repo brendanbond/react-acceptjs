@@ -17,7 +17,7 @@
     "lint": "eslint . --fix"
   },
   "peerDependencies": {
-    "react": "16.8.0 - 18"
+    "react": "16.8.0 - 19"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.4.0",
